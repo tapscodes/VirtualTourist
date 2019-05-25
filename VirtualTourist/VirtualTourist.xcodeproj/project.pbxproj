@@ -8,20 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		02253C022298784D008F82DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02253C012298784D008F82DA /* AppDelegate.swift */; };
-		02253C042298784D008F82DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02253C032298784D008F82DA /* ViewController.swift */; };
 		02253C072298784D008F82DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02253C052298784D008F82DA /* Main.storyboard */; };
 		02253C092298784F008F82DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02253C082298784F008F82DA /* Assets.xcassets */; };
 		02253C0C2298784F008F82DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02253C0A2298784F008F82DA /* LaunchScreen.storyboard */; };
+		027945672299CBB300F81968 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027945662299CBB300F81968 /* MapViewController.swift */; };
+		027945692299CE2000F81968 /* PhotoGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027945682299CE2000F81968 /* PhotoGridViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		02253BFE2298784D008F82DA /* VirtualTourist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtualTourist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02253C012298784D008F82DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		02253C032298784D008F82DA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		02253C062298784D008F82DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		02253C082298784F008F82DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		02253C0B2298784F008F82DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		02253C0D2298784F008F82DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		027945662299CBB300F81968 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		027945682299CE2000F81968 /* PhotoGridViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGridViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,13 +57,22 @@
 			isa = PBXGroup;
 			children = (
 				02253C012298784D008F82DA /* AppDelegate.swift */,
-				02253C032298784D008F82DA /* ViewController.swift */,
 				02253C052298784D008F82DA /* Main.storyboard */,
 				02253C082298784F008F82DA /* Assets.xcassets */,
+				027945652299CBA500F81968 /* View Controllers */,
 				02253C0A2298784F008F82DA /* LaunchScreen.storyboard */,
 				02253C0D2298784F008F82DA /* Info.plist */,
 			);
 			path = VirtualTourist;
+			sourceTree = "<group>";
+		};
+		027945652299CBA500F81968 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				027945662299CBB300F81968 /* MapViewController.swift */,
+				027945682299CE2000F81968 /* PhotoGridViewController.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,8 +146,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02253C042298784D008F82DA /* ViewController.swift in Sources */,
 				02253C022298784D008F82DA /* AppDelegate.swift in Sources */,
+				027945672299CBB300F81968 /* MapViewController.swift in Sources */,
+				027945692299CE2000F81968 /* PhotoGridViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

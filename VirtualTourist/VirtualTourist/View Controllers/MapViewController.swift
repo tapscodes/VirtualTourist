@@ -14,6 +14,9 @@ class MapViewController: UIViewController, MKMapViewDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         var annotations = [MKPointAnnotation]()
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = CLLocationCoordinate2D(latitude: 100, longitude: 100)
+        annotations.append(annotation)
         self.mapView.removeAnnotations(self.mapView.annotations)
         self.mapView.addAnnotations(annotations)
     }

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
-class PhotoGridViewController: UICollectionView{
+import MapKit
+class PhotoGridViewController: UICollectionView, MKMapViewDelegate{
     
 }

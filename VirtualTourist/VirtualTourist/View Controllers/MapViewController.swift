@@ -14,6 +14,7 @@ class MapViewController: UIViewController, MKMapViewDelegate{
     //function called when view is loaded
     override func viewDidLoad() {
         super.viewDidLoad()
+        APICommands().getPhotos(lat: 100.5, long: 100.5)
         deleteWarning.isUserInteractionEnabled = false
         deleteWarning.isHidden = true
         var annotations = [MKPointAnnotation]()

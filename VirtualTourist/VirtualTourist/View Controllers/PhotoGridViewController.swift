@@ -13,7 +13,7 @@ class PhotoGridViewController: UICollectionView, MKMapViewDelegate{
     @IBOutlet weak var collectionView: UICollectionView!
     //function to show how many items are able to be viewed
     override func numberOfItems(inSection section: Int) -> Int {
-        return 5
+        return 30
     }
     //function to set up each cell of the collection view
     override func cellForItem(at indexPath: IndexPath) -> UICollectionViewCell? {

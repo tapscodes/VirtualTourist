@@ -16,6 +16,7 @@
 		02253C0C2298784F008F82DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02253C0A2298784F008F82DA /* LaunchScreen.storyboard */; };
 		027945672299CBB300F81968 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027945662299CBB300F81968 /* MapViewController.swift */; };
 		027945692299CE2000F81968 /* PhotoGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027945682299CE2000F81968 /* PhotoGridViewController.swift */; };
+		02959AFB229CB87100B52D8C /* APICommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02959AFA229CB87100B52D8C /* APICommands.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		02253C0D2298784F008F82DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		027945662299CBB300F81968 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		027945682299CE2000F81968 /* PhotoGridViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGridViewController.swift; sourceTree = "<group>"; };
+		02959AFA229CB87100B52D8C /* APICommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICommands.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +49,7 @@
 			isa = PBXGroup;
 			children = (
 				021BC81F229C8F0600862276 /* PhotoGridCell.swift */,
+				02959AFA229CB87100B52D8C /* APICommands.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 				021BC826229CA57900862276 /* VirtualTourist.xcdatamodeld in Sources */,
 				027945672299CBB300F81968 /* MapViewController.swift in Sources */,
 				021BC820229C8F0600862276 /* PhotoGridCell.swift in Sources */,
+				02959AFB229CB87100B52D8C /* APICommands.swift in Sources */,
 				021BC828229CA63F00862276 /* CoreData.swift in Sources */,
 				027945692299CE2000F81968 /* PhotoGridViewController.swift in Sources */,
 			);

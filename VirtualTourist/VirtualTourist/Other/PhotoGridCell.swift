@@ -11,4 +11,5 @@ import UIKit
 class PhotoGridCell: UICollectionViewCell{
     static let identifier = "PhotoGridCell"
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var activityView: UIActivityIndicatorView!
 }

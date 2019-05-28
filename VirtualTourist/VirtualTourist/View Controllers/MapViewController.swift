@@ -9,10 +9,13 @@ import Foundation
 import MapKit
 import UIKit
 class MapViewController: UIViewController, MKMapViewDelegate{
+    @IBOutlet weak var deleteWarning: UIButton!
     @IBOutlet weak var mapView: MKMapView!
     //function called when view is loaded
     override func viewDidLoad() {
         super.viewDidLoad()
+        deleteWarning.isUserInteractionEnabled = false
+        deleteWarning.isHidden = true
         var annotations = [MKPointAnnotation]()
         let annotation = MKPointAnnotation()
         annotation.coordinate = CLLocationCoordinate2D(latitude: 100, longitude: 100)
@@ -30,5 +33,12 @@ class MapViewController: UIViewController, MKMapViewDelegate{
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         let vc =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "detailVC")
         present(vc, animated: true)
+    }
+    @IBAction func editTapped(_ sender: Any) {
+        if(deleteWarning.isHidden == true){
+        deleteWarning.isHidden = false
+        }else{
+        deleteWarning.isHidden = true
+        }
     }
 }

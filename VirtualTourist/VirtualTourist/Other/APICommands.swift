@@ -5,7 +5,7 @@
 //  Created by Tristan Pudell-Spatscheck on 5/27/19.
 //  Copyright © 2019 TAPS. All rights reserved.
 //
-
+import UIKit
 import Foundation
 class APICommands{
    //NOT ACTUALLY USED, JUST HERE FOR ME TO BE ABLE TO EASILY RETURN TO DOCUMENTATION
@@ -26,6 +26,20 @@ class APICommands{
             return
             }
              print(String(data: data!, encoding: .utf8)!)
+        }
+        task.resume()
+    }
+    func requestImage(farm: String, secret: String, ID: String, server:String){
+        let urlString = "https://farm{\(farm)}.staticflickr.com/{\(server)}/{\(ID)}_{\(secret)}.jpg"
+        let url = URL(string: urlString)
+        let request = URLRequest(url: url!)
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { data, response, error in
+            if error != nil { // Handle error
+                return
+            }
+            print(String(data: data!, encoding: .utf8)!)
+            tempImage = UIImage(data: data!)
         }
         task.resume()
     }

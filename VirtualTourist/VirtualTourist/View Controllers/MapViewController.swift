@@ -28,6 +28,7 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         annotation.coordinate = CLLocationCoordinate2D(latitude: 40.7128, longitude: 74.0060)
         annotation.title = "worked"
         APICommands().getPhotos(lat: 40.7128, long: 74.0060)
+        APICommands().requestImage(farm: "6", secret: "8b816d7d81", ID: "20875765031", server: "5675")
         annotations.append(annotation)
         self.mapView.removeAnnotations(self.mapView.annotations)
         sleep(1)

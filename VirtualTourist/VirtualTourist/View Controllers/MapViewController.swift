@@ -14,12 +14,12 @@ class MapViewController: UIViewController, MKMapViewDelegate{
     //function called when view is loaded
     override func viewDidLoad() {
         super.viewDidLoad()
-        APICommands().getPhotos(lat: 40, long: 74)
+        APICommands().getPhotos(lat: 40.7128, long: 74.0060)
         deleteWarning.isUserInteractionEnabled = false
         deleteWarning.isHidden = true
         var annotations = [MKPointAnnotation]()
         let annotation = MKPointAnnotation()
-        annotation.coordinate = CLLocationCoordinate2D(latitude: 100, longitude: 100)
+        annotation.coordinate = CLLocationCoordinate2D(latitude: 40.7128, longitude: 74.0060)
         annotations.append(annotation)
         self.mapView.removeAnnotations(self.mapView.annotations)
         self.mapView.addAnnotations(annotations)

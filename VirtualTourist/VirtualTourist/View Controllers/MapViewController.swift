@@ -8,8 +8,6 @@
 import Foundation
 import MapKit
 import UIKit
-var pins : [Pin] = []
-var photos: [Photo] = []
 class MapViewController: UIViewController, MKMapViewDelegate{
     @IBOutlet weak var deleteWarning: UIButton!
     @IBOutlet weak var mapView: MKMapView!
@@ -22,11 +20,11 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         var annotations = [MKPointAnnotation]()
         let annotation = MKPointAnnotation()
         //TEST VALUES FOR PINS+ANNOTATIONS (IN NYC)
-        //PINS STILL NOT FUNCTIONAL
-        //var pin: Pin!
-        //pin.lat = 40.7128
-        //pin.long = -74.0060
-        //pins.append(pin)
+        let pin = Pin(context: dataController.viewContext)
+        pin.lat = 40.7128
+        pin.long = -74.0060
+        pins.append(pin)
+        //tests zoom used in photogrid
         //locationZoom(with: CLLocationCoordinate2D(latitude: pins[0].lat, longitude: pins[0].long))
         annotation.coordinate = CLLocationCoordinate2D(latitude: 40.7128, longitude: -74.0060)
         annotation.title = "worked"
@@ -39,19 +37,14 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         self.mapView.addAnnotations(annotations)
         print(self.mapView.annotations)
     }
-    //for function that makes pins
-    /*let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-     let annotation = MKPointAnnotation()
-     annotation.coordinate = coordinate
-     annotations.append(annotation)
-     */
+    //zooms in on a location, used in PhotoGridVC
     func locationZoom(with coordinate: CLLocationCoordinate2D){
         let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
-        self.mapView.isUserInteractionEnabled = true
+        self.mapView.isUserInteractionEnabled = false
         self.mapView.setRegion(region, animated: true)
     }
-    //function called when a pin is tapped
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+    //functionc alled when pin is tapped
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         let vc =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "detailVC")
         present(vc, animated: true)
     }

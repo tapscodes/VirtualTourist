@@ -84,10 +84,8 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         if (deleteWarning.isHidden == true ) {
             print("drill down: ", pinIndex)
             // go to photos
-            //ADD PRESENT LATER (currently crashes app)
-            //let vc =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "detailVC")
-            //self.present(vc, animated: true)
-            
+            let vc =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "detailVC")
+            self.present(vc, animated: true)
         } else {
             // delete pin
             let rmPin: Pin

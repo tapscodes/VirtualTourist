@@ -7,6 +7,7 @@
 //
 import UIKit
 import Foundation
+var imgInfo: ImgInfo?
 class APICommands{
    //NOT ACTUALLY USED, JUST HERE FOR ME TO BE ABLE TO EASILY RETURN TO DOCUMENTATION
    let geoDocumentation = "https://www.flickr.com/services/api/flickr.photos.geo.photosForLocation.html"
@@ -25,7 +26,15 @@ class APICommands{
             if error != nil { // Handle error
             return
             }
-             print(String(data: data!, encoding: .utf8)!)
+            print(String(data: data!, encoding: .utf8)!)
+            do{
+            let decoder = JSONDecoder()
+            imgInfo = try decoder.decode(ImgInfo.self, from: data!)
+            print(imgInfo)
+            }
+            catch{
+            print("BAD PHOTO")
+            }
         }
         task.resume()
     }

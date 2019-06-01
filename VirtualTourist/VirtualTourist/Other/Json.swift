@@ -9,14 +9,14 @@
 import Foundation
 //Image info
 struct ImgInfo: Decodable {
-    let farm: String?
     let ID: String?
     let secret: String?
     let server: String?
+    let farm: String?
     enum CodingKeys: String, CodingKey{
-        case farm = "farm"
         case ID = "id"
         case secret = "secret"
         case server = "server"
+        case farm = "farm"
     }
 }

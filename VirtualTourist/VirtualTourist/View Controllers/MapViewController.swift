@@ -43,6 +43,20 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         self.mapView.isUserInteractionEnabled = false
         self.mapView.setRegion(region, animated: true)
     }
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+            let reuseId = "pin"
+            var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+            if pinView == nil {
+                pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+                pinView!.canShowCallout = true
+                pinView!.pinTintColor = .red
+                pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            }
+            else {
+                pinView!.annotation = annotation
+            }
+            return pinView
+        }
     //functionc alled when pin is tapped
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         let vc =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "detailVC")

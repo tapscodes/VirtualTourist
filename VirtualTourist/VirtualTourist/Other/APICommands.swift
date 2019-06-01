@@ -55,16 +55,22 @@ class APICommands{
         let url = URL(string: urlString)
         let request = URLRequest(url: url!)
         let session = URLSession.shared
+        let persistentPhoto = Photo(context: dataController.viewContext)
+        persistentPhoto.image=nil
+        persistentPhoto.imageUrl=urlString
+        persistentPhoto.pin=pin
+        do {
+            try dataController.viewContext.save()
+        } catch {
+        }
+        
         let task = session.dataTask(with: request) { data, response, error in
             if error != nil { // Handle error
                 return
             }
             //CANT BE PRINTED BECAUSE ITS AN IMAGE
             //print(String(data: data!, encoding: .utf8)!)
-            let persistentPhoto = Photo(context: dataController.viewContext)
             persistentPhoto.image=data!
-            persistentPhoto.imageUrl=urlString
-            persistentPhoto.pin=pin
             do {
                 try dataController.viewContext.save()
             } catch {

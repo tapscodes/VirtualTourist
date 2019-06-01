@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import MapKit
 import CoreData
-class PhotoGridViewController:  UIViewController, UICollectionViewDelegate, MKMapViewDelegate{
+class PhotoGridViewController:  UIViewController, UICollectionViewDelegate, MKMapViewDelegate, UICollectionViewDataSource{
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var mapView: MKMapView!
     var allPhotos: [Photo] = []
@@ -25,6 +25,18 @@ class PhotoGridViewController:  UIViewController, UICollectionViewDelegate, MKMa
         loadImagesInClass(pin: pins[currentPinIndex])
         collectionView.reloadData()
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: PhotoGridCell.identifier)
+    }
+    //sets up collection view
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 30
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoGridCell.identifier, for: indexPath) as! PhotoGridCell
+        print("LOADING")
+        print(allPhotos[0].image!)
+        cell.imageView.image = (UIImage(data: allPhotos[0].image!))
+        cell.activityView.startAnimating()
+        return cell
     }
     //checks if images have been loaded before
     func loadImagesInClass(pin: Pin) {
@@ -66,18 +78,4 @@ class PhotoGridViewController:  UIViewController, UICollectionViewDelegate, MKMa
     //called when new collection is pressed
     @IBAction func newCollection(_ sender: Any) {
     }
-}
-//methods to set up collectionview (dont seem to be called?)
-extension PhotoGridViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30
-    }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoGridCell.identifier, for: indexPath) as! PhotoGridCell
-        print("LOADING")
-        print(allPhotos[0].image!)
-        cell.imageView.image = (UIImage(data: allPhotos[0].image!))
-        cell.activityView.startAnimating()
-        return cell
-}
 }

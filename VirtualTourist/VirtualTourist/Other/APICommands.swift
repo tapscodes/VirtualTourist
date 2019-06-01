@@ -75,7 +75,7 @@ class APICommands{
                 try dataController.viewContext.save()
             } catch {
             }
-            print("DONE LOADING IMAGE ", urlString)
+            //print("DONE LOADING IMAGE ", urlString)
         }
         task.resume()
     }

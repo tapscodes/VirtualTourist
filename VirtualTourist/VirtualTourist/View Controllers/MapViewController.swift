@@ -48,8 +48,10 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         }
     //functionc alled when pin is tapped
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        let vc =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "detailVC")
-        self.present(vc, animated: true)
+        print("worked")
+        //ADD PRESENT LATER (currently crashes app)
+        //let vc =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "detailVC")
+        //self.present(vc, animated: true)
     }
     //func called when edit is tapped
     @IBAction func editTapped(_ sender: Any) {
@@ -61,7 +63,6 @@ class MapViewController: UIViewController, MKMapViewDelegate{
     }
     //whats happens when a long hold is detected
     @objc func longTap(sender: UIGestureRecognizer){
-        print("long tap")
         if sender.state == .began {
             let locationInView = sender.location(in: mapView)
             let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)

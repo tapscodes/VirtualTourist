@@ -17,24 +17,15 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         self.mapView.isUserInteractionEnabled = true
         deleteWarning.isUserInteractionEnabled = false
         deleteWarning.isHidden = true
-        var annotations = [MKPointAnnotation]()
-        let annotation = MKPointAnnotation()
+        mapView.delegate = self
+        //adds long press scanner
+        let longTapGesture = UILongPressGestureRecognizer(target: self, action: #selector(longTap))
+        mapView.addGestureRecognizer(longTapGesture)
         //TEST VALUES FOR PINS+ANNOTATIONS (IN NYC)
-        let pin = Pin(context: dataController.viewContext)
-        pin.lat = 40.7128
-        pin.long = -74.0060
-        pins.append(pin)
         //tests zoom used in photogrid
         //locationZoom(with: CLLocationCoordinate2D(latitude: pins[0].lat, longitude: pins[0].long))
-        annotation.coordinate = CLLocationCoordinate2D(latitude: pins[0].lat, longitude: pins[0].long)
-        APICommands().getPhotos(lat: pins[0].lat, long: pins[0].long)
+        APICommands().getPhotos(lat: 40, long: -74)
         APICommands().requestImage(farm: "6", secret: "8b816d7d81", ID: "20875765031", server: "5675")
-        annotations.append(annotation)
-        self.mapView.removeAnnotations(self.mapView.annotations)
-        sleep(1)
-        print("Map Loading")
-        self.mapView.addAnnotations(annotations)
-        print(self.mapView.annotations)
     }
     //zooms in on a location, used in PhotoGridVC
     func locationZoom(with coordinate: CLLocationCoordinate2D){
@@ -58,7 +49,7 @@ class MapViewController: UIViewController, MKMapViewDelegate{
     //functionc alled when pin is tapped
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         let vc =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "detailVC")
-        present(vc, animated: true)
+        self.present(vc, animated: true)
     }
     //func called when edit is tapped
     @IBAction func editTapped(_ sender: Any) {
@@ -66,6 +57,20 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         deleteWarning.isHidden = false
         }else{
         deleteWarning.isHidden = true
+        }
+    }
+    @objc func longTap(sender: UIGestureRecognizer){
+        print("long tap")
+        if sender.state == .began {
+            let locationInView = sender.location(in: mapView)
+            let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)
+            let pin = Pin(context: dataController.viewContext)
+            pin.lat = locationOnMap.latitude
+            pin.long = locationOnMap.longitude
+            pins.append(pin)
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = CLLocationCoordinate2D(latitude: pin.lat, longitude: pin.long)
+            self.mapView.addAnnotation(annotation)
         }
     }
 }

@@ -16,9 +16,9 @@ class PhotoGridViewController:  UIViewController, UICollectionViewDelegate, MKMa
         super.viewDidLoad()
         //sets up mapView at top
         let annotation = MKPointAnnotation()
-        annotation.coordinate = CLLocationCoordinate2D(latitude: pins[pinID].lat, longitude: pins[pinID].long)
+        annotation.coordinate = CLLocationCoordinate2D(latitude: pins[currentPinIndex].lat, longitude: pins[currentPinIndex].long)
         self.mapView.addAnnotation(annotation)
-        locationZoom(with: CLLocationCoordinate2D(latitude: pins[pinID].lat, longitude: pins[pinID].long))
+        locationZoom(with: CLLocationCoordinate2D(latitude: pins[currentPinIndex].lat, longitude: pins[currentPinIndex].long))
     }
     //function to show how many items are able to be viewed
     func numberOfItems(inSection section: Int) -> Int {
@@ -27,7 +27,6 @@ class PhotoGridViewController:  UIViewController, UICollectionViewDelegate, MKMa
     //function to set up each cell of the collection view
     func cellForItem(at indexPath: IndexPath) -> UICollectionViewCell? {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoGridCell.identifier, for: indexPath) as! PhotoGridCell
-        cell.imageView.image = nil
         cell.activityView.startAnimating()
         return cell
     }
@@ -36,5 +35,8 @@ class PhotoGridViewController:  UIViewController, UICollectionViewDelegate, MKMa
         let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 100000, longitudinalMeters: 100000)
         self.mapView.isUserInteractionEnabled = false
         self.mapView.setRegion(region, animated: true)
+    }
+    //called when new collection is pressed
+    @IBAction func newCollection(_ sender: Any) {
     }
 }

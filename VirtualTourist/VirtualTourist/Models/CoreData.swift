@@ -7,8 +7,11 @@
 //
 import Foundation
 import CoreData
+
 var pins : [Pin] = []
-var photos: [Photo] = []
+var currentPinIndex: Int = -1
+
+
 var dataController = DataController(modelName: "VirtualTourist")
 class DataController {
     let persistentContainer:NSPersistentContainer

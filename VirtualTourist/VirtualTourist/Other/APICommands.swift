@@ -9,31 +9,34 @@ import UIKit
 import Foundation
 var imgInfo: ImgInfo?
 class APICommands{
-   //NOT ACTUALLY USED, JUST HERE FOR ME TO BE ABLE TO EASILY RETURN TO DOCUMENTATION
-   let geoDocumentation = "https://www.flickr.com/services/api/flickr.photos.geo.photosForLocation.html"
-   //THIS IS WHERE YOU PUT YOUR API KEY (this one is fake so noone can overload requests)
-   let apiKey = "8980acc92ce4a6549c9dd4a144685ec2"
-   let webURL = "https://api.flickr.com"
-   let methodHead = "/services/rest/?method="
-   let getPhoto = "flickr.photos.search"
+    //NOT ACTUALLY USED, JUST HERE FOR ME TO BE ABLE TO EASILY RETURN TO DOCUMENTATION
+    let geoDocumentation = "https://www.flickr.com/services/api/flickr.photos.geo.photosForLocation.html"
+    //THIS IS WHERE YOU PUT YOUR API KEY (this one is fake so noone can overload requests)
+    let apiKey = "8980acc92ce4a6549c9dd4a144685ec2"
+    let webURL = "https://api.flickr.com"
+    let methodHead = "/services/rest/?method="
+    let getPhoto = "flickr.photos.search"
     //gets 30 photos at given lat+long
-    func getPhotos(lat: Double ,long: Double){
+    func getPhotos(pin: Pin){
+        let lat = pin.lat
+        let long = pin.long
         let urlString = "\(webURL)\(methodHead)\(getPhoto)&api_key=\(apiKey)&accuracy=15&has_geo=1&lat=\(lat)&lon=\(long)&per_page=30&page=1&format=json&nojsoncallback=1"
         let url = URL(string: urlString)
         let request = URLRequest(url: url!)
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
             if error != nil { // Handle error
-            return
+                return
             }
             print(String(data: data!, encoding: .utf8)!)
             do{
-            let decoder = JSONDecoder()
-            imgInfo = try decoder.decode(ImgInfo.self, from: data!)
-            print(imgInfo)
+                let decoder = JSONDecoder()
+                imgInfo = try decoder.decode(ImgInfo.self, from: data!)
+                print(imgInfo)
             }
             catch{
-            print("BAD PHOTO")
+                print("BAD PHOTO")
+                // XXX Do something to tell user there is an issue
             }
         }
         task.resume()

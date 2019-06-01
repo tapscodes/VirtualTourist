@@ -141,6 +141,9 @@
                                             <constraint firstAttribute="height" constant="50" id="aol-ez-A7l"/>
                                         </constraints>
                                         <state key="normal" title="New Collection"/>
+                                        <connections>
+                                            <action selector="newConnection:" destination="EWB-1h-HK4" eventType="touchUpInside" id="Ksy-vl-IXv"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>

@@ -9,7 +9,7 @@ import Foundation
 import MapKit
 import UIKit
 import CoreData
-var pinID: Int = 0
+
 class MapViewController: UIViewController, MKMapViewDelegate{
     @IBOutlet weak var deleteWarning: UIButton!
     @IBOutlet weak var mapView: MKMapView!
@@ -47,6 +47,8 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         let longTapGesture = UILongPressGestureRecognizer(target: self, action: #selector(longTap))
         mapView.addGestureRecognizer(longTapGesture)
         //TEST VALUES FOR PINS+ANNOTATIONS (IN NYC)
+        //tests zoom used in photogrid
+        //locationZoom(with: CLLocationCoordinate2D(latitude: pins[0].lat, longitude: pins[0].long))
         //APICommands().getPhotos(lat: 40, long: -74)
         //APICommands().requestImage(farm: "6", secret: "8b816d7d81", ID: "20875765031", server: "5675")
     }
@@ -77,7 +79,7 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         if (deleteWarning.isHidden == true ) {
             print("drill down: ", pinIndex)
             // go to photos and adds back button
-            pinID = pinIndex
+            currentPinIndex = pinIndex
             let vc =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "detailVC")
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
@@ -117,6 +119,8 @@ class MapViewController: UIViewController, MKMapViewDelegate{
             //adds pin to map
             let annotation = MKPointAnnotation()
             annotation.coordinate = CLLocationCoordinate2D(latitude: pin.lat, longitude: pin.long)
+            //now load the photos for the pin
+            APICommands().getPhotos(pin: pin)
             self.mapView.addAnnotation(annotation)
             do {
                 try dataController.viewContext.save()

@@ -24,18 +24,17 @@ class PhotoGridViewController:  UIViewController, UICollectionViewDelegate, MKMa
         //gets images
         loadImagesInClass(pin: pins[currentPinIndex])
         collectionView.reloadData()
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: PhotoGridCell.identifier)
     }
     //sets up collection view
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30
+        return allPhotos.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         print("LOADING")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoGridCell", for: indexPath) as! PhotoGridCell
-        print(allPhotos[0].image!)
-        cell.imageView.image = (UIImage(data: allPhotos[0].image!))
         cell.activityView.startAnimating()
+        cell.imageView.image = (UIImage(data: allPhotos[indexPath.row].image!))
+        cell.activityView.stopAnimating()
         return cell
     }
     //checks if images have been loaded before

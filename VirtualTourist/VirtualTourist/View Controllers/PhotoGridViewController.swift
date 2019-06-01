@@ -19,6 +19,9 @@ class PhotoGridViewController:  UIViewController, UICollectionViewDelegate, MKMa
         annotation.coordinate = CLLocationCoordinate2D(latitude: pins[currentPinIndex].lat, longitude: pins[currentPinIndex].long)
         self.mapView.addAnnotation(annotation)
         locationZoom(with: CLLocationCoordinate2D(latitude: pins[currentPinIndex].lat, longitude: pins[currentPinIndex].long))
+        //gets images
+        APICommands().getPhotos(pin: pins[currentPinIndex])
+        
     }
     //function to show how many items are able to be viewed
     func numberOfItems(inSection section: Int) -> Int {

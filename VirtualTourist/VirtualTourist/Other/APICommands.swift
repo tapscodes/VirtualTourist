@@ -7,7 +7,7 @@
 //
 import UIKit
 import Foundation
-var imgInfo: ImgInfo?
+
 class APICommands{
     //NOT ACTUALLY USED, JUST HERE FOR ME TO BE ABLE TO EASILY RETURN TO DOCUMENTATION
     let geoDocumentation = "https://www.flickr.com/services/api/flickr.photos.geo.photosForLocation.html"
@@ -28,21 +28,29 @@ class APICommands{
             if error != nil { // Handle error
                 return
             }
-            print(String(data: data!, encoding: .utf8)!)
+            //print(String(data: data!, encoding: .utf8)!)
             do{
                 let decoder = JSONDecoder()
-                imgInfo = try decoder.decode(ImgInfo.self, from: data!)
-                print(imgInfo)
+                var imgResponse: ImgResponse
+                imgResponse = try decoder.decode(ImgResponse.self, from: data!)
+                if (imgResponse.photos.total == "0") {
+                    /// XXX no images let user know
+                } else {
+                    for (index,photo) in imgResponse.photos.photo!.enumerated() {
+                        self.requestImage(index: index, pin: pin, farm: photo.farm!, secret: photo.secret!, ID: photo.ID!, server: photo.server!)
+                    }
+                }
+                
             }
             catch{
-                print("BAD PHOTO")
+                print(error)
                 // XXX Do something to tell user there is an issue
             }
         }
         task.resume()
     }
     //changes tempImage to the requested image
-    func requestImage(farm: String, secret: String, ID: String, server:String){
+    func requestImage(index: Int, pin: Pin, farm: Int, secret: String, ID: String, server:String){
         let urlString = "https://farm\(farm).staticflickr.com/\(server)/\(ID)_\(secret).jpg"
         let url = URL(string: urlString)
         let request = URLRequest(url: url!)
@@ -53,7 +61,15 @@ class APICommands{
             }
             //CANT BE PRINTED BECAUSE ITS AN IMAGE
             //print(String(data: data!, encoding: .utf8)!)
-            tempImage = UIImage(data: data!)
+            let persistentPhoto = Photo(context: dataController.viewContext)
+            persistentPhoto.image=data!
+            persistentPhoto.imageUrl=urlString
+            persistentPhoto.pin=pin
+            do {
+                try dataController.viewContext.save()
+            } catch {
+            }
+            print("DONE LOADING IMAGE ", urlString)
         }
         task.resume()
     }

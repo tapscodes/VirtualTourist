@@ -142,6 +142,7 @@
                                         </constraints>
                                         <state key="normal" title="New Collection"/>
                                         <connections>
+                                            <action selector="newCollection:" destination="EWB-1h-HK4" eventType="touchUpInside" id="CxN-l1-C5Z"/>
                                             <action selector="newConnection:" destination="EWB-1h-HK4" eventType="touchUpInside" id="Ksy-vl-IXv"/>
                                         </connections>
                                     </button>

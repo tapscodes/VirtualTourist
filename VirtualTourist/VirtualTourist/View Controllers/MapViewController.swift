@@ -49,7 +49,6 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         //TEST VALUES FOR PINS+ANNOTATIONS (IN NYC)
         //tests zoom used in photogrid
         //locationZoom(with: CLLocationCoordinate2D(latitude: pins[0].lat, longitude: pins[0].long))
-        //APICommands().getPhotos(lat: 40, long: -74)
         //APICommands().requestImage(farm: "6", secret: "8b816d7d81", ID: "20875765031", server: "5675")
     }
     //sets up pins on mapview
@@ -120,7 +119,6 @@ class MapViewController: UIViewController, MKMapViewDelegate{
             let annotation = MKPointAnnotation()
             annotation.coordinate = CLLocationCoordinate2D(latitude: pin.lat, longitude: pin.long)
             //now load the photos for the pin
-            APICommands().getPhotos(pin: pin)
             self.mapView.addAnnotation(annotation)
             do {
                 try dataController.viewContext.save()

@@ -26,9 +26,8 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         pins.append(pin)
         //tests zoom used in photogrid
         //locationZoom(with: CLLocationCoordinate2D(latitude: pins[0].lat, longitude: pins[0].long))
-        annotation.coordinate = CLLocationCoordinate2D(latitude: 40.7128, longitude: -74.0060)
-        annotation.title = "worked"
-        APICommands().getPhotos(lat: 40.7128, long: -74.0060)
+        annotation.coordinate = CLLocationCoordinate2D(latitude: pins[0].lat, longitude: pins[0].long)
+        APICommands().getPhotos(lat: pins[0].lat, long: pins[0].long)
         APICommands().requestImage(farm: "6", secret: "8b816d7d81", ID: "20875765031", server: "5675")
         annotations.append(annotation)
         self.mapView.removeAnnotations(self.mapView.annotations)
@@ -48,9 +47,8 @@ class MapViewController: UIViewController, MKMapViewDelegate{
             var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
             if pinView == nil {
                 pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-                pinView!.canShowCallout = true
+                pinView!.canShowCallout = false
                 pinView!.pinTintColor = .red
-                pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
             }
             else {
                 pinView!.annotation = annotation
@@ -58,7 +56,7 @@ class MapViewController: UIViewController, MKMapViewDelegate{
             return pinView
         }
     //functionc alled when pin is tapped
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         let vc =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "detailVC")
         present(vc, animated: true)
     }

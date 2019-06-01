@@ -29,8 +29,9 @@ class APICommands{
         }
         task.resume()
     }
+    //changes tempImage to the requested image
     func requestImage(farm: String, secret: String, ID: String, server:String){
-        let urlString = "https://farm{\(farm)}.staticflickr.com/{\(server)}/{\(ID)}_{\(secret)}.jpg"
+        let urlString = "https://farm\(farm).staticflickr.com/\(server)/\(ID)_\(secret).jpg"
         let url = URL(string: urlString)
         let request = URLRequest(url: url!)
         let session = URLSession.shared
@@ -38,7 +39,8 @@ class APICommands{
             if error != nil { // Handle error
                 return
             }
-            print(String(data: data!, encoding: .utf8)!)
+            //CANT BE PRINTED BECAUSE ITS AN IMAGE
+            //print(String(data: data!, encoding: .utf8)!)
             tempImage = UIImage(data: data!)
         }
         task.resume()

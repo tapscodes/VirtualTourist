@@ -59,15 +59,18 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         deleteWarning.isHidden = true
         }
     }
+    //whats happens when a long hold is detected
     @objc func longTap(sender: UIGestureRecognizer){
         print("long tap")
         if sender.state == .began {
             let locationInView = sender.location(in: mapView)
             let locationOnMap = mapView.convert(locationInView, toCoordinateFrom: mapView)
+            //sets pin lat+long and adds it to pins array
             let pin = Pin(context: dataController.viewContext)
             pin.lat = locationOnMap.latitude
             pin.long = locationOnMap.longitude
             pins.append(pin)
+            //adds pin to map
             let annotation = MKPointAnnotation()
             annotation.coordinate = CLLocationCoordinate2D(latitude: pin.lat, longitude: pin.long)
             self.mapView.addAnnotation(annotation)

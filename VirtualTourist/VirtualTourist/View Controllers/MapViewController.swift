@@ -29,7 +29,7 @@ class MapViewController: UIViewController, MKMapViewDelegate{
             }
             self.mapView.addAnnotations(annotations)
         } catch {
-            // XXX add error pop up here
+            return
         }
     }
     //function called when the view loads
@@ -83,9 +83,9 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         if (pinIndex == -1 ) { return }
         if (deleteWarning.isHidden == true ) {
             print("drill down: ", pinIndex)
-            // go to photos
+            // go to photos and adds back button
             let vc =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "detailVC")
-            self.present(vc, animated: true)
+            self.navigationController?.pushViewController(vc, animated: true)
         } else {
             // delete pin
             let rmPin: Pin

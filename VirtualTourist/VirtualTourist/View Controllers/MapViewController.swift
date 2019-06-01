@@ -5,11 +5,11 @@
 //  Created by Tristan Pudell-Spatscheck on 5/25/19.
 //  Copyright © 2019 TAPS. All rights reserved.
 //
-var pins : [Pin]?
-var photos: [Photo]?
 import Foundation
 import MapKit
 import UIKit
+var pins : [Pin] = []
+var photos: [Photo] = []
 class MapViewController: UIViewController, MKMapViewDelegate{
     @IBOutlet weak var deleteWarning: UIButton!
     @IBOutlet weak var mapView: MKMapView!
@@ -22,12 +22,15 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         var annotations = [MKPointAnnotation]()
         let annotation = MKPointAnnotation()
         //TEST VALUES FOR PINS+ANNOTATIONS (IN NYC)
-        locationZoom(with: CLLocationCoordinate2D(latitude: 40.7128, longitude: 74.0060))
-        //pins![0].lat = 40.7128
-        //pins![0].long = 74.0060
-        annotation.coordinate = CLLocationCoordinate2D(latitude: 40.7128, longitude: 74.0060)
+        //PINS STILL NOT FUNCTIONAL
+        //var pin: Pin!
+        //pin.lat = 40.7128
+        //pin.long = -74.0060
+        //pins.append(pin)
+        //locationZoom(with: CLLocationCoordinate2D(latitude: pins[0].lat, longitude: pins[0].long))
+        annotation.coordinate = CLLocationCoordinate2D(latitude: 40.7128, longitude: -74.0060)
         annotation.title = "worked"
-        APICommands().getPhotos(lat: 40.7128, long: 74.0060)
+        APICommands().getPhotos(lat: 40.7128, long: -74.0060)
         APICommands().requestImage(farm: "6", secret: "8b816d7d81", ID: "20875765031", server: "5675")
         annotations.append(annotation)
         self.mapView.removeAnnotations(self.mapView.annotations)

@@ -56,7 +56,7 @@ class MapViewController: UIViewController, MKMapViewDelegate{
             return pinView
         }
     //functionc alled when pin is tapped
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         let vc =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "detailVC")
         present(vc, animated: true)
     }

@@ -31,8 +31,8 @@ class PhotoGridViewController:  UIViewController, UICollectionViewDelegate, MKMa
         return 30
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoGridCell.identifier, for: indexPath) as! PhotoGridCell
         print("LOADING")
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoGridCell", for: indexPath) as! PhotoGridCell
         print(allPhotos[0].image!)
         cell.imageView.image = (UIImage(data: allPhotos[0].image!))
         cell.activityView.startAnimating()

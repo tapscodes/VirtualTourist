@@ -134,6 +134,10 @@
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>
+                                        <connections>
+                                            <outlet property="dataSource" destination="EWB-1h-HK4" id="2Mc-j8-rfh"/>
+                                            <outlet property="delegate" destination="EWB-1h-HK4" id="M1d-Pw-Iga"/>
+                                        </connections>
                                     </collectionView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oh7-W3-Qj7">
                                         <rect key="frame" x="0.0" y="618" width="414" height="50"/>

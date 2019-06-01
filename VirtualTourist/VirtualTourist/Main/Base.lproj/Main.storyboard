@@ -79,7 +79,7 @@
         <!--Detail-->
         <scene sceneID="psO-n0-TYg">
             <objects>
-                <viewController storyboardIdentifier="detailVC" title="Detail" useStoryboardIdentifierAsRestorationIdentifier="YES" id="EWB-1h-HK4" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="detailVC" title="Detail" useStoryboardIdentifierAsRestorationIdentifier="YES" id="EWB-1h-HK4" customClass="PhotoGridViewController" customModule="VirtualTourist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="m6d-CO-ad4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -89,11 +89,14 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="Ukr-Zo-kY7"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="EWB-1h-HK4" id="epe-fU-bJE"/>
+                                </connections>
                             </mapView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4NK-vQ-3bQ">
                                 <rect key="frame" x="0.0" y="194" width="414" height="668"/>
                                 <subviews>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ecg-dx-VuA" customClass="PhotoGridViewController" customModule="VirtualTourist" customModuleProvider="target">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ecg-dx-VuA">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="618"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vFv-R0-F3b">
@@ -165,6 +168,10 @@
                         <viewLayoutGuide key="safeArea" id="Wk1-fx-trp"/>
                     </view>
                     <navigationItem key="navigationItem" title="OK" id="2Cy-1C-b4V"/>
+                    <connections>
+                        <outlet property="collectionView" destination="Ecg-dx-VuA" id="kSk-ty-aoy"/>
+                        <outlet property="mapView" destination="jsf-yW-RRn" id="Vbz-3Y-Vk9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nyj-RG-bK8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

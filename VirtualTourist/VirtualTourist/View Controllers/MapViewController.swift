@@ -48,7 +48,12 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         }
     //functionc alled when pin is tapped
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        print("worked")
+        for (index,pin) in pins.enumerated() {
+            if(pin.lat == view.annotation!.coordinate.latitude) && (pin.long == view.annotation!.coordinate.longitude) {
+                print ("Got it")
+                print (index)
+            }
+        }
         //ADD PRESENT LATER (currently crashes app)
         //let vc =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "detailVC")
         //self.present(vc, animated: true)

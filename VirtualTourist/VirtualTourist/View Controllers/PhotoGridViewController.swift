@@ -14,6 +14,10 @@ class PhotoGridViewController:  UIViewController, UICollectionViewDelegate, MKMa
     @IBOutlet weak var mapView: MKMapView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        //sets up mapView at top
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = CLLocationCoordinate2D(latitude: pins[pinID].lat, longitude: pins[pinID].long)
+        self.mapView.addAnnotation(annotation)
         locationZoom(with: CLLocationCoordinate2D(latitude: pins[pinID].lat, longitude: pins[pinID].long))
     }
     //function to show how many items are able to be viewed
@@ -29,7 +33,7 @@ class PhotoGridViewController:  UIViewController, UICollectionViewDelegate, MKMa
     }
     //zooms in on a location
     func locationZoom(with coordinate: CLLocationCoordinate2D){
-        let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+        let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 100000, longitudinalMeters: 100000)
         self.mapView.isUserInteractionEnabled = false
         self.mapView.setRegion(region, animated: true)
     }

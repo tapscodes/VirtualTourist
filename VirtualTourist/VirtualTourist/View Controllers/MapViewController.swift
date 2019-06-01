@@ -47,8 +47,6 @@ class MapViewController: UIViewController, MKMapViewDelegate{
         let longTapGesture = UILongPressGestureRecognizer(target: self, action: #selector(longTap))
         mapView.addGestureRecognizer(longTapGesture)
         //TEST VALUES FOR PINS+ANNOTATIONS (IN NYC)
-        //tests zoom used in photogrid
-        //locationZoom(with: CLLocationCoordinate2D(latitude: pins[0].lat, longitude: pins[0].long))
         //APICommands().getPhotos(lat: 40, long: -74)
         //APICommands().requestImage(farm: "6", secret: "8b816d7d81", ID: "20875765031", server: "5675")
     }

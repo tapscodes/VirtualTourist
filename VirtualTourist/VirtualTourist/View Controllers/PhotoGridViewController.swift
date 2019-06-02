@@ -41,13 +41,12 @@ class PhotoGridViewController:  UIViewController, UICollectionViewDelegate, MKMa
         let rmPhoto: Photo
         print("delete photo: ", indexPath.row)
         rmPhoto = allPhotos[indexPath.row]
-        allPhotos.remove(at: indexPath.row) // remove from array
+        allPhotos.remove(at: indexPath.row)
         do { // remove it from persisten storage and save.
-            // This will also delete all photos in persistent storage based on the data model
             dataController.viewContext.delete(rmPhoto)
             try dataController.viewContext.save()
         } catch {
-            // add an error if we can't delete and save
+            return
         }
         collectionView.reloadData()
     }
@@ -76,7 +75,7 @@ class PhotoGridViewController:  UIViewController, UICollectionViewDelegate, MKMa
             allPhotos=result
             // put it on the map
             for photo in allPhotos {
-                //print("found",photo.imageUrl);
+                print("found",photo.imageUrl);
             }
         } catch {
             return
@@ -90,5 +89,17 @@ class PhotoGridViewController:  UIViewController, UICollectionViewDelegate, MKMa
     }
     //called when new collection is pressed
     @IBAction func newCollection(_ sender: Any) {
+        let rmPhoto: Photo
+        for photo in allPhotos {
+            dataController.viewContext.delete(photo)
+        }
+        allPhotos.removeAll()
+        do { // remove it from persisten storage and save.
+            try dataController.viewContext.save()
+        } catch {
+            return
+        }
+        loadImagesInClass(pin: pins[currentPinIndex])
+        collectionView.reloadData()
     }
 }

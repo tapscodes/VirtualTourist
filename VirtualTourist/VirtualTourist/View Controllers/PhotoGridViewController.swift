@@ -30,12 +30,26 @@ class PhotoGridViewController:  UIViewController, UICollectionViewDelegate, MKMa
         return allPhotos.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("LOADING")
+        //print("LOADING")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoGridCell", for: indexPath) as! PhotoGridCell
-        cell.activityView.startAnimating()
         cell.imageView.image = (UIImage(data: allPhotos[indexPath.row].image!))
         cell.activityView.stopAnimating()
         return cell
+    }
+    //deletes cell when clicked
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let rmPhoto: Photo
+        print("delete photo: ", indexPath.row)
+        rmPhoto = allPhotos[indexPath.row]
+        allPhotos.remove(at: indexPath.row) // remove from array
+        do { // remove it from persisten storage and save.
+            // This will also delete all photos in persistent storage based on the data model
+            dataController.viewContext.delete(rmPhoto)
+            try dataController.viewContext.save()
+        } catch {
+            // add an error if we can't delete and save
+        }
+        collectionView.reloadData()
     }
     //checks if images have been loaded before
     func loadImagesInClass(pin: Pin) {

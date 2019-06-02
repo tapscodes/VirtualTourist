@@ -23,7 +23,6 @@ class PhotoGridViewController:  UIViewController, UICollectionViewDelegate, MKMa
         locationZoom(with: CLLocationCoordinate2D(latitude: pins[currentPinIndex].lat, longitude: pins[currentPinIndex].long))
         //gets images
         loadImagesInClass(pin: pins[currentPinIndex])
-        collectionView.reloadData()
     }
     //sets up collection view
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -32,8 +31,14 @@ class PhotoGridViewController:  UIViewController, UICollectionViewDelegate, MKMa
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         //print("LOADING")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoGridCell", for: indexPath) as! PhotoGridCell
-        cell.imageView.image = (UIImage(data: allPhotos[indexPath.row].image!))
-        cell.activityView.stopAnimating()
+        cell.activityView.hidesWhenStopped = true
+        cell.activityView.startAnimating()
+        if let img = allPhotos[indexPath.row].image {
+             cell.imageView.image = UIImage(data: img)
+            cell.activityView.stopAnimating()
+        } else {
+            cell.imageView.image = UIImage(named: "black")
+        }
         return cell
     }
     //deletes cell when clicked
@@ -50,18 +55,42 @@ class PhotoGridViewController:  UIViewController, UICollectionViewDelegate, MKMa
         }
         collectionView.reloadData()
     }
+    func refreshTillAllLoaded() {
+        var has_nil: Bool = true
+        while ( has_nil ) {
+            if (!allPhotos.isEmpty)
+            {
+                has_nil = false
+            }
+            for photo in allPhotos {
+                if let img = photo.image {
+                } else {
+                    has_nil = true
+                }
+            }
+            sleep(1)
+                DispatchQueue.main.async {
+                self.fetchPhotos(pin: pins[currentPinIndex])
+                self.collectionView.reloadData()
+                do {
+                    try dataController.viewContext.save()
+                } catch {
+                }
+            }
+        }
+    }
     //checks if images have been loaded before
     func loadImagesInClass(pin: Pin) {
         allPhotos.removeAll()
         fetchPhotos(pin: pins[currentPinIndex])
         if (allPhotos.isEmpty) {
-            print("Fetching NEW IMAGES")
-            //gets images
             APICommands().getPhotos(pin: pins[currentPinIndex])
-            sleep(5)
-            fetchPhotos(pin: pins[currentPinIndex])
+            let dispatchQueue = DispatchQueue(label: "CheckingForDownloads", qos: .background)
+            dispatchQueue.async{
+                self.refreshTillAllLoaded()
+            }
         } else {
-            print("Images already available")
+            collectionView.reloadData()
         }
     }
     //fetches photos stored at given pin
@@ -73,12 +102,8 @@ class PhotoGridViewController:  UIViewController, UICollectionViewDelegate, MKMa
             // get the data
             let result = try dataController.viewContext.fetch(fetchRequest)
             allPhotos=result
-            // put it on the map
-            for photo in allPhotos {
-                print("found",photo.imageUrl);
-            }
         } catch {
-            return
+            allPhotos.removeAll()
         }
     }
     //zooms in on a location

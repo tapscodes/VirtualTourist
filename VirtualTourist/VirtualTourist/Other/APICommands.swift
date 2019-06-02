@@ -40,7 +40,6 @@ class APICommands{
                         self.requestImage(index: index, pin: pin, farm: photo.farm!, secret: photo.secret!, ID: photo.ID!, server: photo.server!)
                     }
                 }
-                
             }
             catch{
                 print(error)
@@ -59,11 +58,7 @@ class APICommands{
         persistentPhoto.image=nil
         persistentPhoto.imageUrl=urlString
         persistentPhoto.pin=pin
-        do {
-            try dataController.viewContext.save()
-        } catch {
-        }
-        
+            
         let task = session.dataTask(with: request) { data, response, error in
             if error != nil { // Handle error
                 return
@@ -71,10 +66,6 @@ class APICommands{
             //CANT BE PRINTED BECAUSE ITS AN IMAGE
             //print(String(data: data!, encoding: .utf8)!)
             persistentPhoto.image=data!
-            do {
-                try dataController.viewContext.save()
-            } catch {
-            }
             //print("DONE LOADING IMAGE ", urlString)
         }
         task.resume()
